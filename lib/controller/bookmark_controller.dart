@@ -41,14 +41,16 @@ class BookmarkController with ChangeNotifier{
      }
    }
 
-   removeFromBookMarks(RecipeModel recipeModel) async {
+   Future<int>removeFromBookMarks(RecipeModel recipeModel) async {
      try {
        await _bookmarkService.open();
        int removeRecipe = await _bookmarkService.delete(recipeModel.id!);
        print ('delete $removeRecipe from bookMarks');
        await getAllBookMarks();
+       return removeRecipe;
      } catch (error) {
-      print("Error has occurred whilst fetching recipes $error"); 
+      print("Error has occurred whilst fetching recipes $error");
+      return 0; 
      }finally{
        await  _bookmarkService.close();
      }

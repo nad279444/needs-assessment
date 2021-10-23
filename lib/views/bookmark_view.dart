@@ -31,7 +31,12 @@ class BookmarkView extends StatelessWidget {
                 RecipeModel recipeModel = snapshot.data![index];
                   return ListTile(
                     title: Text(recipeModel.title),
-                  );
+                    trailing:   IconButton(
+                      onPressed: () async {
+                        await bookmarkController.removeFromBookMarks(recipeModel);
+                      },
+                      icon: const  Icon(Icons.delete_forever_outlined,),
+                  ));
               }, 
               separatorBuilder: (BuildContext context,int index){
                   return const Divider();
